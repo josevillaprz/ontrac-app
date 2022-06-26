@@ -1,0 +1,25 @@
+.container {
+    background-color: #F4F5F8;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px #C5CADB;
+    /* min-width: 240px; */
+}
+
+.listItem {
+    color: #737885;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 500;
+}

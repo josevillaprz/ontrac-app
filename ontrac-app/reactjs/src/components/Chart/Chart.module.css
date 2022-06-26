@@ -1,0 +1,21 @@
+.container {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px #D0D8E8;
+    padding: 30px 0 80px 0;
+    margin-bottom: 60px;
+}
+
+.h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 40px;
+}
+
+.img {
+    width: 90%;
+    max-width: 900px
+}

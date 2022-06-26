@@ -1,0 +1,26 @@
+.container {
+    background-color: #F4F5F8;
+    border-radius: 12px;
+    padding: 15px 30px;
+    margin: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 3px 10px #C5CADB;
+}
+
+.label {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.weight {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.date {
+    color: #737885;
+    font-weight: 300;
+    font-size: 14px;
+}

@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.input {
+    margin: 20px 40px 20px 0;
+    width: calc(50% - 60px);
+    min-width: 260px;
+}
+
+.btn {
+    align-self: end;
+}

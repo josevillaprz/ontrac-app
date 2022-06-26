@@ -1,0 +1,12 @@
+.container {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    padding: 4px;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px #C5CADB;
+    cursor: pointer;
+}
