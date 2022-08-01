@@ -2,9 +2,14 @@ import React from "react";
 import { VscEdit } from "react-icons/vsc";
 import styles from "./EditBtn.module.css";
 
-const EditBtn = ({ clickHandler }) => {
+const EditBtn = ({ id, toggleEdit }) => {
   return (
-    <button onClick={clickHandler} type="button" className={styles.container}>
+    <button
+      id={id}
+      onClick={toggleEdit}
+      type="button"
+      className={styles.container}
+    >
       <VscEdit size="26" className={styles.icon} />
     </button>
   );

@@ -1,112 +1,110 @@
 import React, { useState, useEffect } from "react";
 import ExerciseList from "../../components/ExerciseList/ExerciseList";
-import ExerciseForm from "../../components/ExerciseForm/ExerciseForm";
+import AddExercise from "../../components/AddExercise/AddExercise";
+import EditExercise from "../../components/EditExercise/EditExercise";
 import styles from "../PageStyles.module.css";
 import Nav from "../../components/Nav/Nav";
 
 const Exercise = ({ user }) => {
-  const [createExercise, setCreateExercise] = useState(false);
+  const [active, setActive] = useState("list");
   const [exercises, setExercises] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [name, setName] = useState("");
-  const [sets, setSets] = useState(0);
-  const [reps, setReps] = useState(0);
-  const [pounds, setPounds] = useState(0);
-  const [note, setNote] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [editExerciseId, setEditExerciseId] = useState(0);
+  // const [inputData, setInputdata] = useState({
+  //   name: "",
+  //   sets: 0,
+  //   reps: 0,
+  //   pounds: 0,
+  //   note: "",
+  // });
 
-  useEffect(() => {
-    const fetchExercises = async () => {
-      const response = await fetch("/exercise/all", {
-        headers: {
-          "Content-Type": "application/json",
-          token: `${localStorage.getItem("accessToken")}`,
-        },
-        method: "GET",
-      });
-      const data = await response.json();
-      setExercises(data);
-    };
-    // call function
-    fetchExercises();
-    setIsLoading(false);
-  }, [createExercise]);
-
-  // HANDLERS
-  const handleEditClick = (e) => {
-    setCreateExercise(!createExercise);
-  };
-
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    console.log(e);
-    // fetch api and create new exercise
-    const response = await fetch("/exercise/create", {
+  const fetchExercises = async () => {
+    setIsLoading(true);
+    const response = await fetch("/exercise/all", {
       headers: {
         "Content-Type": "application/json",
         token: `${localStorage.getItem("accessToken")}`,
       },
-      method: "POST",
-      body: JSON.stringify({
-        name,
-        reps,
-        sets,
-        pounds,
-        note,
-      }),
+      method: "GET",
     });
     const data = await response.json();
-    console.log(data);
-    handleEditClick();
-
-    // fetch the data again displaying the new data
+    setExercises(data);
+    setIsLoading(false);
   };
 
-  const nameHandler = (e) => {
-    setName(e.target.value);
+  useEffect(() => {
+    fetchExercises();
+  }, []);
+
+  const toggleCreate = (e) => {
+    setActive("create");
   };
 
-  const repsHandler = (e) => {
-    setReps(e.target.value);
+  const toggleList = (e) => {
+    setActive("list");
   };
 
-  const setsHandler = (e) => {
-    setSets(e.target.value);
+  const toggleEdit = (e) => {
+    setEditExerciseId(e.currentTarget.id);
+    setActive("edit");
   };
 
-  const poundsHandler = (e) => {
-    setPounds(e.target.value);
+  // const createExercise = async (e) => {
+  //   e.preventDefault();
+  //   // fetch api and create new exercise
+  //   const response = await fetch("/exercise/create", {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       token: `${localStorage.getItem("accessToken")}`,
+  //     },
+  //     method: "POST",
+  //     body: JSON.stringify(inputData),
+  //   });
+  //   if (response.ok) {
+  //     console.log("Request succeeded");
+  //   }
+  //   fetchExercises();
+  //   toggleList();
+  // };
+
+  const updateExercise = (e) => {
+    e.preventDefault();
+    console.log("running update");
+    toggleList();
   };
 
-  const noteHandler = (e) => {
-    setNote(e.target.value);
-  };
+  // const changeHandler = (e) => {
+  //   const value = e.target.value;
+  //   setInputdata({ ...inputData, [e.target.name]: value });
+  // };
 
   return (
     <div className={styles.container}>
       <Nav />
-      {isLoading ? (
-        <div>Loading...</div> // will be updated to blank state
-      ) : (
-        <main className={styles.contentContainer}>
-          <h1 className={styles.title}>Exercises</h1>
-          {createExercise ? (
-            <ExerciseForm
-              clickHandler={handleEditClick}
-              submitHandler={submitHandler}
-              nameHandler={nameHandler}
-              repsHandler={repsHandler}
-              setsHandler={setsHandler}
-              poundsHandler={poundsHandler}
-              noteHandler={noteHandler}
-            />
-          ) : (
+      <main className={styles.contentContainer}>
+        {active === "list" && (
+          <>
+            <h1 className={styles.title}>Exercises</h1>
             <ExerciseList
-              clickHandler={handleEditClick}
+              toggle={toggleCreate}
+              toggleEdit={toggleEdit}
               exercises={exercises}
             />
-          )}
-        </main>
-      )}
+          </>
+        )}
+        {active === "create" && (
+          <>
+            <h1 className={styles.title}>Add exercise</h1>
+            <AddExercise toggle={toggleList} />
+          </>
+        )}
+        {active === "edit" && (
+          <>
+            <h1 className={styles.title}>Edit exercise</h1>
+            <EditExercise toggle={toggleList} editId={editExerciseId} />
+          </>
+        )}
+      </main>
     </div>
   );
 };

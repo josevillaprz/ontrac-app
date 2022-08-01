@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Exercise.module.css";
 import EditBtn from "../Buttons/EditBtn";
 
-const Exercise = ({ name, sets, reps, lbs }) => {
+const Exercise = ({ id, name, sets, reps, lbs, toggle, toggleEdit }) => {
   return (
     <div className={styles.container}>
       <div>
@@ -11,7 +11,7 @@ const Exercise = ({ name, sets, reps, lbs }) => {
           {sets} sets · {reps} reps · {lbs} lbs
         </p>
       </div>
-      <EditBtn />
+      <EditBtn toggleEdit={toggleEdit} id={id} />
     </div>
   );
 };
