@@ -11,7 +11,7 @@ const ExerciseForm = ({ toggle, submitHandler, changeHandler, data }) => {
         fullWidth={true}
         style={styles.input}
         onChange={changeHandler}
-        value={data ? data.name : ""}
+        value={data && data.name}
       />
       <div style={styles.horizontalInput}>
         <TextField
@@ -20,7 +20,7 @@ const ExerciseForm = ({ toggle, submitHandler, changeHandler, data }) => {
           variant="outlined"
           style={styles.input}
           onChange={changeHandler}
-          value={data ? data.sets : ""}
+          value={data && data.sets}
         />
         <TextField
           name="reps"
@@ -28,7 +28,7 @@ const ExerciseForm = ({ toggle, submitHandler, changeHandler, data }) => {
           variant="outlined"
           style={styles.input}
           onChange={changeHandler}
-          value={data ? data.reps : ""}
+          value={data && data.reps}
         />
         <TextField
           name="pounds"
@@ -36,7 +36,7 @@ const ExerciseForm = ({ toggle, submitHandler, changeHandler, data }) => {
           variant="outlined"
           style={styles.input}
           onChange={changeHandler}
-          value={data ? data.pounds : ""}
+          value={data && data.pounds}
         />
       </div>
       <TextField
@@ -47,7 +47,7 @@ const ExerciseForm = ({ toggle, submitHandler, changeHandler, data }) => {
         fullWidth={true}
         style={styles.input}
         onChange={changeHandler}
-        value={data ? data.note : ""}
+        value={data && data.note}
       />
       <Button
         variant="outlined"
