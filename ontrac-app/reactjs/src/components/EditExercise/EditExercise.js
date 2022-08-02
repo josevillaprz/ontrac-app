@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { GetExercise, UpdateExercise } from "../../utils/api";
 import Form from "../Form/Form";
 
-const EditExercise = ({ editId, toggle }) => {
+const EditExercise = ({ editId, toggle, fetch }) => {
   const [inputData, setInputdata] = useState({
     name: "",
     sets: 0,
@@ -12,18 +13,11 @@ const EditExercise = ({ editId, toggle }) => {
 
   useEffect(() => {
     // request to api for current data in database
-    const getCurrentData = async () => {
-      const response = await fetch(`/exercise/${editId}`, {
-        headers: {
-          "Content-Type": "application/json",
-          token: `${localStorage.getItem("accessToken")}`,
-        },
-        method: "GET",
-      });
-      const data = await response.json();
+    const fetchExercise = async () => {
+      const data = await GetExercise(editId);
       setInputdata(data);
     };
-    getCurrentData();
+    fetchExercise();
   }, []);
 
   const changeHandler = (e) => {
@@ -31,9 +25,11 @@ const EditExercise = ({ editId, toggle }) => {
     setInputdata({ ...inputData, [e.target.name]: value });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     console.log(" edit submit handler called..");
+    UpdateExercise(inputData, editId);
+    await fetch();
     toggle();
   };
 

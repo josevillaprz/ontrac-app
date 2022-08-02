@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CreateExercise } from "../../utils/api";
 import Form from "../Form/Form";
 
 const AddExercise = ({ toggle }) => {
@@ -17,7 +18,7 @@ const AddExercise = ({ toggle }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("create submitted");
+    CreateExercise(inputData);
     toggle();
   };
 

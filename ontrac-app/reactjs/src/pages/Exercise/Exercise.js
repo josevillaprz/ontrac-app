@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { GetAllExercises } from "../../utils/api";
 import ExerciseList from "../../components/ExerciseList/ExerciseList";
 import AddExercise from "../../components/AddExercise/AddExercise";
 import EditExercise from "../../components/EditExercise/EditExercise";
@@ -8,75 +9,31 @@ import Nav from "../../components/Nav/Nav";
 const Exercise = ({ user }) => {
   const [active, setActive] = useState("list");
   const [exercises, setExercises] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [editExerciseId, setEditExerciseId] = useState(0);
-  // const [inputData, setInputdata] = useState({
-  //   name: "",
-  //   sets: 0,
-  //   reps: 0,
-  //   pounds: 0,
-  //   note: "",
-  // });
 
-  const fetchExercises = async () => {
-    setIsLoading(true);
-    const response = await fetch("/exercise/all", {
-      headers: {
-        "Content-Type": "application/json",
-        token: `${localStorage.getItem("accessToken")}`,
-      },
-      method: "GET",
-    });
-    const data = await response.json();
+  const FetchExercises = async () => {
+    const data = await GetAllExercises();
     setExercises(data);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    fetchExercises();
-  }, []);
+    FetchExercises();
+  }, [active]);
 
-  const toggleCreate = (e) => {
+  const ToggleCreate = (e) => {
     setActive("create");
   };
 
-  const toggleList = (e) => {
+  const ToggleList = (e) => {
     setActive("list");
   };
 
-  const toggleEdit = (e) => {
+  const ToggleEdit = (e) => {
     setEditExerciseId(e.currentTarget.id);
     setActive("edit");
   };
-
-  // const createExercise = async (e) => {
-  //   e.preventDefault();
-  //   // fetch api and create new exercise
-  //   const response = await fetch("/exercise/create", {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       token: `${localStorage.getItem("accessToken")}`,
-  //     },
-  //     method: "POST",
-  //     body: JSON.stringify(inputData),
-  //   });
-  //   if (response.ok) {
-  //     console.log("Request succeeded");
-  //   }
-  //   fetchExercises();
-  //   toggleList();
-  // };
-
-  const updateExercise = (e) => {
-    e.preventDefault();
-    console.log("running update");
-    toggleList();
-  };
-
-  // const changeHandler = (e) => {
-  //   const value = e.target.value;
-  //   setInputdata({ ...inputData, [e.target.name]: value });
-  // };
 
   return (
     <div className={styles.container}>
@@ -86,8 +43,8 @@ const Exercise = ({ user }) => {
           <>
             <h1 className={styles.title}>Exercises</h1>
             <ExerciseList
-              toggle={toggleCreate}
-              toggleEdit={toggleEdit}
+              toggle={ToggleCreate}
+              toggleEdit={ToggleEdit}
               exercises={exercises}
             />
           </>
@@ -95,13 +52,17 @@ const Exercise = ({ user }) => {
         {active === "create" && (
           <>
             <h1 className={styles.title}>Add exercise</h1>
-            <AddExercise toggle={toggleList} />
+            <AddExercise toggle={ToggleList} />
           </>
         )}
         {active === "edit" && (
           <>
             <h1 className={styles.title}>Edit exercise</h1>
-            <EditExercise toggle={toggleList} editId={editExerciseId} />
+            <EditExercise
+              toggle={ToggleList}
+              editId={editExerciseId}
+              fetch={FetchExercises}
+            />
           </>
         )}
       </main>
