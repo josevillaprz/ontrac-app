@@ -1,3 +1,4 @@
 module.exports = function errorHandler(err, req, res, next) {
-  res.send(err.message);
+  // catch all error handler
+  res.status(err.status || 500).json({ message: err.message });
 };
