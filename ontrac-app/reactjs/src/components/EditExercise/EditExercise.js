@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { GetExercise, UpdateExercise } from "../../utils/api";
 import Form from "../Form/Form";
 
-const EditExercise = ({ editId, toggle, fetch }) => {
+const EditExercise = ({ editId, toggle }) => {
   const [inputData, setInputdata] = useState({
     name: "",
     sets: 0,
@@ -28,8 +28,7 @@ const EditExercise = ({ editId, toggle, fetch }) => {
   const submitHandler = async (e) => {
     e.preventDefault();
     console.log(" edit submit handler called..");
-    UpdateExercise(inputData, editId);
-    await fetch();
+    await UpdateExercise(inputData, editId);
     toggle();
   };
 

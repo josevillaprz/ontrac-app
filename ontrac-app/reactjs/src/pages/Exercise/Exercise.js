@@ -5,6 +5,7 @@ import AddExercise from "../../components/AddExercise/AddExercise";
 import EditExercise from "../../components/EditExercise/EditExercise";
 import styles from "../PageStyles.module.css";
 import Nav from "../../components/Nav/Nav";
+import { DeleteExercise } from "../../utils/api";
 
 const Exercise = ({ user }) => {
   const [active, setActive] = useState("list");
@@ -35,6 +36,13 @@ const Exercise = ({ user }) => {
     setActive("edit");
   };
 
+  const DeleteHandler = async (e) => {
+    console.log("Deleting exercise...");
+    console.log(e.currentTarget.id);
+    await DeleteExercise(e.currentTarget.id);
+    FetchExercises();
+  };
+
   return (
     <div className={styles.container}>
       <Nav />
@@ -46,6 +54,7 @@ const Exercise = ({ user }) => {
               toggle={ToggleCreate}
               toggleEdit={ToggleEdit}
               exercises={exercises}
+              deleteHandler={DeleteHandler}
             />
           </>
         )}
@@ -58,11 +67,7 @@ const Exercise = ({ user }) => {
         {active === "edit" && (
           <>
             <h1 className={styles.title}>Edit exercise</h1>
-            <EditExercise
-              toggle={ToggleList}
-              editId={editExerciseId}
-              fetch={FetchExercises}
-            />
+            <EditExercise toggle={ToggleList} editId={editExerciseId} />
           </>
         )}
       </main>

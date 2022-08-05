@@ -16,9 +16,9 @@ const AddExercise = ({ toggle }) => {
     setInputdata({ ...inputData, [e.target.name]: value });
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    CreateExercise(inputData);
+    await CreateExercise(inputData);
     toggle();
   };
 

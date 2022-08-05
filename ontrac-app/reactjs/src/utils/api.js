@@ -48,3 +48,17 @@ export const GetExercise = async (id) => {
   const data = await response.json();
   return data;
 };
+
+export const DeleteExercise = async (id) => {
+  const response = await fetch(`/exercise/delete/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      token: `${localStorage.getItem("accessToken")}`,
+    },
+  });
+  if (!response.ok) {
+    console.log("something went wrong deleteing exercise");
+  }
+  console.log(response);
+};

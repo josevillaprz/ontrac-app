@@ -1,0 +1,39 @@
+.container {
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 30px;
+    padding: 6px;
+    border-radius: 3px;
+    box-shadow: 0 3px 6px #C5CADB;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.icon {
+    color: rgb(158, 172, 195);
+}
+
+.container>p {
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+/* HOVER STATES */
+.container:hover {
+    transform: scale(1.12);
+    border-radius: 6px;
+}
+
+.container.delete:hover {
+    background-color: #f9adb5;
+}
+
+.delete:hover .icon {
+    color: #f45f6e;
+}
+
+.edit:hover .icon {
+    color: #607283;
+}

@@ -1,16 +1,15 @@
 import React from "react";
-import { VscEdit } from "react-icons/vsc";
-import styles from "./EditBtn.module.css";
+import { MdEdit } from "react-icons/md";
+import styles from "./styles.module.css";
 
 const EditBtn = ({ id, toggleEdit }) => {
   return (
     <button
       id={id}
       onClick={toggleEdit}
-      type="button"
-      className={styles.container}
+      className={`${styles.container} ${styles.edit}`}
     >
-      <VscEdit size="26" className={styles.icon} />
+      <MdEdit size="20" className={styles.icon} />
     </button>
   );
 };
