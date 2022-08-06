@@ -1,6 +1,6 @@
-import React from "react";
-import Logo from "../../assets/logo-white.png";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import logo from "../../assets/logo-white.png";
+import { NavLink } from "react-router-dom";
 import styles from "./Nav.module.css";
 import {
   BiDumbbell,
@@ -9,48 +9,67 @@ import {
   BiUserCircle,
 } from "react-icons/bi";
 import { IoScaleOutline } from "react-icons/io5";
-
-// import { Link } from "react-router-dom";
+import { AiOutlineMenu } from "react-icons/ai";
 
 const Nav = () => {
+  const [showNav, setShowNav] = useState(false);
+
   return (
-    <nav className={styles.container}>
-      <Link to="/homepage" className={styles.imgLink}>
-        <img src={Logo} alt="logo" className={styles.img} />
-      </Link>
-      <ul>
-        <li className={styles.item}>
-          <Link to="/homepage" className={styles.link}>
-            <BiHomeAlt size="26" className={styles.icon} />
-            Home
-          </Link>
-        </li>
-        <li className={styles.item}>
-          <Link to="/exercises" className={styles.link}>
-            <BiDumbbell size="26" className={styles.icon} />
-            Exercises
-          </Link>
-        </li>
-        <li className={styles.item}>
-          <Link to="/workouts" className={styles.link}>
-            <BiCalendarEvent size="26" className={styles.icon} />
-            Workouts
-          </Link>
-        </li>
-        <li className={styles.item}>
-          <Link to="/weight" className={styles.link}>
-            <IoScaleOutline size="26" className={styles.icon} />
-            Weight
-          </Link>
-        </li>
-        <li className={styles.item}>
-          <Link to="/profile" className={styles.link}>
-            <BiUserCircle size="26" className={styles.icon} />
-            Profile
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <div className={styles.container}>
+      <NavLink to="/homepage">
+        <img src={logo} alt="logo" className={styles.logo} />
+      </NavLink>
+      <button className={styles.toggle} onClick={() => setShowNav(!showNav)}>
+        <AiOutlineMenu size={"30"} />
+      </button>
+      <nav className={showNav ? styles.open : undefined}>
+        <NavLink
+          to="/homepage"
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          <BiHomeAlt size="26" className={styles.icon} />
+          Home
+        </NavLink>
+        <NavLink
+          to="/exercises"
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          <BiDumbbell size="26" className={styles.icon} />
+          Exercises
+        </NavLink>
+        <NavLink
+          to="/workouts"
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          <BiCalendarEvent size="26" className={styles.icon} />
+          Workouts
+        </NavLink>
+        <NavLink
+          to="/weight"
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          <IoScaleOutline size="26" className={styles.icon} />
+          Weight
+        </NavLink>
+        <NavLink
+          to="/profile"
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active}` : styles.link
+          }
+        >
+          <BiUserCircle size="26" className={styles.icon} />
+          Profile
+        </NavLink>
+      </nav>
+    </div>
   );
 };
 
