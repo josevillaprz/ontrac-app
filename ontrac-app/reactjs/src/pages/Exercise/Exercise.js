@@ -5,6 +5,7 @@ import AddExercise from "../../components/AddExercise/AddExercise";
 import EditExercise from "../../components/EditExercise/EditExercise";
 import styles from "../PageStyles.module.css";
 import Nav from "../../components/Nav/Nav";
+import Loader from "../../components/Loader/Loader";
 import { DeleteExercise } from "../../utils/api";
 
 const Exercise = ({ user }) => {
@@ -46,31 +47,37 @@ const Exercise = ({ user }) => {
   return (
     <div className={styles.container}>
       <Nav />
-      <main className={styles.contentContainer}>
-        {active === "list" && (
-          <>
-            <h1 className={styles.title}>Exercises</h1>
-            <ExerciseList
-              toggle={ToggleCreate}
-              toggleEdit={ToggleEdit}
-              exercises={exercises}
-              deleteHandler={DeleteHandler}
-            />
-          </>
-        )}
-        {active === "create" && (
-          <>
-            <h1 className={styles.title}>Add exercise</h1>
-            <AddExercise toggle={ToggleList} />
-          </>
-        )}
-        {active === "edit" && (
-          <>
-            <h1 className={styles.title}>Edit exercise</h1>
-            <EditExercise toggle={ToggleList} editId={editExerciseId} />
-          </>
-        )}
-      </main>
+      {isLoading ? (
+        <main>
+          <Loader />
+        </main>
+      ) : (
+        <main>
+          {active === "list" && (
+            <>
+              <h1 className={styles.title}>Exercises</h1>
+              <ExerciseList
+                toggle={ToggleCreate}
+                toggleEdit={ToggleEdit}
+                exercises={exercises}
+                deleteHandler={DeleteHandler}
+              />
+            </>
+          )}
+          {active === "create" && (
+            <>
+              <h1 className={styles.title}>Add exercise</h1>
+              <AddExercise toggle={ToggleList} />
+            </>
+          )}
+          {active === "edit" && (
+            <>
+              <h1 className={styles.title}>Edit exercise</h1>
+              <EditExercise toggle={ToggleList} editId={editExerciseId} />
+            </>
+          )}
+        </main>
+      )}
     </div>
   );
 };

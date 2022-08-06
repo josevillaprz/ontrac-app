@@ -7,6 +7,7 @@ import styles from "../PageStyles.module.css";
 import { BiDumbbell, BiCalendarEvent } from "react-icons/bi";
 import { IoScaleOutline } from "react-icons/io5";
 import Nav from "../../components/Nav/Nav";
+import Loader from "../../components/Loader/Loader";
 
 const Homepage = () => {
   const [user, setUser] = useState({});
@@ -34,9 +35,11 @@ const Homepage = () => {
     <div className={styles.container}>
       <Nav />
       {isLoading ? (
-        <div>loading...</div> // Will need to update to blank state
+        <main>
+          <Loader />
+        </main> // Will need to update to blank state
       ) : (
-        <main className={styles.contentContainer}>
+        <main>
           <UserHeader heading={`Welcome back, ${user.firstName}`} />
           <div className={homeStyles.cardGroup}>
             <IconCard
