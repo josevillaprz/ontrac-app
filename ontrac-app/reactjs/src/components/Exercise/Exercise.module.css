@@ -1,10 +1,12 @@
 .container {
     border-bottom: 2px solid rgb(241, 241, 244);
+    box-sizing: border-box;
     padding: 15px 20px;
     margin-bottom: 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
 }
 
 .title {
