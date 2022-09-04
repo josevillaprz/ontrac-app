@@ -17,9 +17,8 @@ const Workoutlist = ({ clickHandler, workouts }) => {
       </Button>
       <Grid container spacing={3} className={styles.listContainer}>
         {workouts.map((workout) => (
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} key={workout.id}>
             <Workout
-              key={workout.id}
               title={workout.name}
               exercises={workout.Exercises}
               className={styles.listItem}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CreateExercise } from "../../utils/api";
-import Form from "../Form/Form";
+import ExerciseForm from "../ExerciseForm/ExerciseForm";
 
 const AddExercise = ({ toggle }) => {
   const [inputData, setInputdata] = useState({
@@ -24,7 +24,7 @@ const AddExercise = ({ toggle }) => {
 
   return (
     <div style={styles.container}>
-      <Form
+      <ExerciseForm
         toggle={toggle}
         submitHandler={submitHandler}
         changeHandler={changeHandler}

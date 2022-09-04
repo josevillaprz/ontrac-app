@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       models.Workout.hasOne(models.Note);
       models.Workout.belongsTo(models.User);
       models.Workout.belongsToMany(models.Exercise, {
-        through: models.Workout_exercise,
+        through: { model: models.Workout_exercise, unique: false },
       });
     }
   }

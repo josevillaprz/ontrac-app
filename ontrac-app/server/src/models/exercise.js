@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.Exercise.belongsToMany(models.Workout, {
-        through: models.Workout_exercise,
+        through: { model: models.Workout_exercise, unique: false },
       });
       models.Exercise.belongsTo(models.User);
     }

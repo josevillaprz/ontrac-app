@@ -1,17 +1,17 @@
 import React from "react";
 import styles from "./Workout.module.css";
-import EditBtn from "../Buttons/EditBtn";
+import DeleteBtn from "../Buttons/DeleteBtn";
 
 const Workout = ({ title, exercises }) => {
   return (
     <li className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.title}>{title}</h1>
-        <EditBtn />
+        <DeleteBtn />
       </div>
       <ul>
         {exercises.map((exercise) => (
-          <li className={styles.listItem}>
+          <li className={styles.listItem} key={exercise.id}>
             <p>{exercise.name}</p>
             <p>{exercise.reps} reps</p>
             <p>{exercise.sets} sets</p>
