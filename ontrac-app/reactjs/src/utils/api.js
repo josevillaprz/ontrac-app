@@ -1,3 +1,4 @@
+//  EXERCISE API REQUESTS
 export const CreateExercise = async (data) => {
   console.log("creating exercise...", data);
   const response = await fetch("/exercise/create", {
@@ -15,7 +16,7 @@ export const CreateExercise = async (data) => {
 
 export const UpdateExercise = async (data, id) => {
   console.log("updating exercise...", data);
-  const response = await fetch(`/exercise/edit/${id}`, {
+  await fetch(`/exercise/edit/${id}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -61,4 +62,51 @@ export const DeleteExercise = async (id) => {
     console.log("something went wrong deleteing exercise");
   }
   console.log(response);
+};
+
+// WORKOUT API REQUESTS
+export const GetUserWorkouts = async (id) => {
+  const response = await fetch(`/workout/all/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      token: `${localStorage.getItem("accessToken")}`,
+    },
+  });
+  if (!response.ok) {
+    console.log("Something went wrong requesting user workouts");
+  }
+  const data = await response.json();
+  return data;
+};
+
+export const CreateWorkout = async (data) => {
+  const response = await fetch("/workout/create", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      token: `${localStorage.getItem("accessToken")}`,
+    },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    console.log("Something went wrong creating user workout");
+  } else {
+    console.log("workout created");
+  }
+};
+
+export const DeleteWorkout = async (id) => {
+  const response = await fetch(`/workout/delete/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      token: `${localStorage.getItem("accessToken")}`,
+    },
+  });
+  if (!response.ok) {
+    console.log("Something went wrong deleting workout.");
+  } else {
+    console.log("workout deleted");
+  }
 };

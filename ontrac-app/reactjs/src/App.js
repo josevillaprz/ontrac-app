@@ -23,6 +23,7 @@ function App() {
   };
 
   const navigate = useNavigate();
+
   // check if user is already logged in
   useEffect(() => {
     const token = localStorage.getItem("accessToken");

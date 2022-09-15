@@ -5,7 +5,8 @@ exports.getAllWorkouts = async (req, res, next) => {
     // query database for all workouts
     const workouts = await Workout.findAll({
       where: { userId: req.params.userId },
-      include: [{ model: Exercise }],
+      include: { model: Exercise },
+      plain: false,
     });
     res.status(200).json(workouts);
   } catch (err) {
@@ -31,16 +32,22 @@ exports.getWorkout = async (req, res, next) => {
 
 exports.createWorkout = async (req, res, next) => {
   // get values from request body
-  const { name, userId } = req.body;
+  const { name, exerciseIds } = req.body;
   try {
-    // query database to create user
+    // create workout in Workout table
     const workout = await Workout.create({
       name,
-      userId,
+      userId: req.user.id,
     });
-    // ********** will need to add to joining table aswell *************
+    // add workout and exercises ids to joining table
+    exerciseIds.forEach(async (id) => {
+      await Workout_exercise.create({
+        workoutId: workout.id,
+        exerciseId: id,
+      });
+    });
     // respond back to client
-    res.status(200).send(workout);
+    res.status(200).json({ message: `workout ${workout.id} created.` });
   } catch (err) {
     next(err);
   }
@@ -71,8 +78,9 @@ exports.deleteWorkout = async (req, res, next) => {
     if (!workout) {
       res.status(404).json({ message: "Workout not found" });
     } else {
-      // if found delete
+      // if found delete from workout table and joining table
       await Workout.destroy({ where: { id: req.params.id } });
+      await Workout_exercise.destroy({ where: { workoutId: req.params.id } });
       res.sendStatus(204);
     }
   } catch (err) {

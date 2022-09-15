@@ -3,20 +3,40 @@ import { TextField, Button } from "@mui/material";
 import DropDown from "../DropDown/DropDown";
 import { GrAddCircle } from "react-icons/gr";
 
-const Workoutform = ({ clickHandler, exercises }) => {
-  const [inputList, setInputList] = useState([]);
+const Workoutform = ({
+  clickHandler,
+  submitHandler,
+  exercises,
+  exerciseChangeHandler,
+  nameChangeHandler,
+}) => {
+  const [dropDowns, setDropDowns] = useState([]);
+  const [inputCount, setInputCount] = useState(1);
+
   const handleClick = (e) => {
-    setInputList(inputList.concat(<DropDown exercises={exercises} />));
+    setDropDowns([
+      ...dropDowns,
+      <DropDown
+        name="exercise"
+        exerciseChangeHandler={exerciseChangeHandler}
+        key={inputCount}
+        exercises={exercises}
+        index={inputCount}
+      />,
+    ]);
+    setInputCount(inputCount + 1);
   };
+
   return (
-    <div style={styles.container}>
-      <form action="/" style={styles.formContainer}>
+    <section style={styles.container}>
+      <form onSubmit={submitHandler} style={styles.formContainer}>
         <TextField
           label="Workout name"
-          fullWidth="true"
+          fullWidth={true}
           style={styles.textInput}
+          onChange={nameChangeHandler}
         />
-        {inputList}
+        {dropDowns}
         <button type="button" onClick={handleClick} style={styles.addBtn}>
           <GrAddCircle size="26" />
           Add Exercise
@@ -35,7 +55,7 @@ const Workoutform = ({ clickHandler, exercises }) => {
           </Button>
         </div>
       </form>
-    </div>
+    </section>
   );
 };
 
