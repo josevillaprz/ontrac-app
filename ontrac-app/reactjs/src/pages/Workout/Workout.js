@@ -4,13 +4,19 @@ import WorkoutForm from "../../components/WorkoutForm/WorkoutForm";
 import styles from "../PageStyles.module.css";
 import Nav from "../../components/Nav/Nav";
 import Loader from "../../components/Loader/Loader";
-import { GetUserWorkouts, GetAllExercises } from "../../utils/api";
+import {
+  GetUserWorkouts,
+  GetAllExercises,
+  CreateWorkout,
+  DeleteWorkout,
+} from "../../utils/api";
 
 const Workout = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [workouts, setWorkouts] = useState([]);
   const [exercises, setExercises] = useState([]);
   const [active, setActive] = useState("list");
+  const [toggleFetch, setToggleFetch] = useState(false);
   const [inputData, setInputData] = useState({
     userId: 1,
     name: "",
@@ -43,7 +49,6 @@ const Workout = () => {
   const fetchWorkout = async () => {
     const data = await GetUserWorkouts(localStorage.getItem("userId"));
     setWorkouts(data);
-    console.log(data);
   };
 
   const fetchExercises = async () => {
@@ -55,25 +60,19 @@ const Workout = () => {
     fetchWorkout();
     fetchExercises();
     setIsLoading(false);
-  }, []);
+  }, [toggleFetch]);
 
   // handle post request
   const submitHandler = async (e) => {
     e.preventDefault();
-    const response = await fetch("/workout/create", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        token: `${localStorage.getItem("accessToken")}`,
-      },
-      body: JSON.stringify(inputData),
-    });
-    if (!response.ok) {
-      console.log("Something went wrong creating workout");
-    }
-    console.log("Workout Created");
+    await CreateWorkout(inputData);
     toggleList();
-    fetchWorkout();
+    setToggleFetch(!toggleFetch);
+  };
+
+  const deleteHandler = async (e) => {
+    await DeleteWorkout(e.currentTarget.id);
+    setToggleFetch(!toggleFetch);
   };
 
   return (
@@ -86,7 +85,11 @@ const Workout = () => {
           {active === "list" && (
             <>
               <h1 className={styles.title}>Workouts</h1>
-              <WorkoutList workouts={workouts} clickHandler={toggleList} />
+              <WorkoutList
+                workouts={workouts}
+                clickHandler={toggleList}
+                deleteHandler={deleteHandler}
+              />
             </>
           )}
           {active === "create" && (

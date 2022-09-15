@@ -78,8 +78,9 @@ exports.deleteWorkout = async (req, res, next) => {
     if (!workout) {
       res.status(404).json({ message: "Workout not found" });
     } else {
-      // if found delete
+      // if found delete from workout table and joining table
       await Workout.destroy({ where: { id: req.params.id } });
+      await Workout_exercise.destroy({ where: { workoutId: req.params.id } });
       res.sendStatus(204);
     }
   } catch (err) {

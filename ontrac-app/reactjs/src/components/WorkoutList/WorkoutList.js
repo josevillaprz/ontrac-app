@@ -4,7 +4,7 @@ import Workout from "../Workout/Workout";
 import styles from "./WorkoutList.module.css";
 import { Grid, Button } from "@mui/material";
 
-const Workoutlist = ({ clickHandler, workouts }) => {
+const Workoutlist = ({ clickHandler, workouts, deleteHandler }) => {
   return (
     <section className={styles.container}>
       <Button
@@ -15,17 +15,29 @@ const Workoutlist = ({ clickHandler, workouts }) => {
       >
         Add Workout
       </Button>
-      <Grid container spacing={3} className={styles.listContainer}>
-        {workouts.map((workout) => (
-          <Grid item xs={12} md={6} key={workout.id}>
-            <Workout
-              title={workout.name}
-              exercises={workout.Exercises}
-              className={styles.listItem}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      {workouts.length === 0 ? (
+        <div className="empty-state">
+          <h2>Create a Workout.</h2>
+          <p>
+            You don't have any saved workouts. Start by creating a new work out
+            from your saved exercise.
+          </p>
+        </div>
+      ) : (
+        <Grid container spacing={3} className={styles.listContainer}>
+          {workouts.map((workout) => (
+            <Grid item xs={12} md={6} key={workout.id}>
+              <Workout
+                title={workout.name}
+                exercises={workout.Exercises}
+                className={styles.listItem}
+                deleteHandler={deleteHandler}
+                id={workout.id}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </section>
   );
 };

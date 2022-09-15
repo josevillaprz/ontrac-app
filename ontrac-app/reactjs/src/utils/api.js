@@ -77,11 +77,10 @@ export const GetUserWorkouts = async (id) => {
     console.log("Something went wrong requesting user workouts");
   }
   const data = await response.json();
-  console.log(data);
   return data;
 };
 
-export const CreateWorkout = async (data, id) => {
+export const CreateWorkout = async (data) => {
   const response = await fetch("/workout/create", {
     method: "POST",
     headers: {
@@ -92,5 +91,22 @@ export const CreateWorkout = async (data, id) => {
   });
   if (!response.ok) {
     console.log("Something went wrong creating user workout");
+  } else {
+    console.log("workout created");
+  }
+};
+
+export const DeleteWorkout = async (id) => {
+  const response = await fetch(`/workout/delete/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      token: `${localStorage.getItem("accessToken")}`,
+    },
+  });
+  if (!response.ok) {
+    console.log("Something went wrong deleting workout.");
+  } else {
+    console.log("workout deleted");
   }
 };
