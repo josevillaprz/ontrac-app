@@ -7,7 +7,7 @@ Ontrac is a web app used to track and create workouts and exercises. This app is
 <br>
 
 ## Project Status
-Currently, this project is still under development. Users can currently make an account/log in, create exercises and workouts. Chart creation and form validation is still being worked on.
+Currently, this project is still under development. Users can currently make an account/log in, create exercises and workouts. Chart creation and form validation is still being worked on. Be sure to checkout the `dev` branch to see current works on project
 
 <br>
 
