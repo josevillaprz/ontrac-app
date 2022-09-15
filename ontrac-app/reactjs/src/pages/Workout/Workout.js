@@ -62,7 +62,6 @@ const Workout = () => {
     setIsLoading(false);
   }, [toggleFetch]);
 
-  // handle post request
   const submitHandler = async (e) => {
     e.preventDefault();
     await CreateWorkout(inputData);

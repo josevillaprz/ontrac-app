@@ -16,7 +16,7 @@ const Workoutlist = ({ clickHandler, workouts, deleteHandler }) => {
         Add Workout
       </Button>
       {workouts.length === 0 ? (
-        <div className="empty-state">
+        <div className={styles.emptyContainer}>
           <h2>Create a Workout.</h2>
           <p>
             You don't have any saved workouts. Start by creating a new work out
