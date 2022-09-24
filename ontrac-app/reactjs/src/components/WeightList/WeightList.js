@@ -10,10 +10,10 @@ const Weightlist = ({ clickHandler }) => {
         Log Weight
       </Button>
       <ul>
+        {/* <WeightLog weight="180" date="5/5/2022" />
         <WeightLog weight="180" date="5/5/2022" />
         <WeightLog weight="180" date="5/5/2022" />
-        <WeightLog weight="180" date="5/5/2022" />
-        <WeightLog weight="180" date="5/5/2022" />
+        <WeightLog weight="180" date="5/5/2022" /> */}
       </ul>
     </div>
   );
