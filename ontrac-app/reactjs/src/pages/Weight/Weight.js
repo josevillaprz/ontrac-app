@@ -50,7 +50,7 @@ const Weight = () => {
             changeHandler={changeHandler}
           />
         ) : (
-          <WeightList clickHandler={handleClick} />
+          <WeightList clickHandler={handleClick} data={weightData} />
         )}
       </main>
     </div>
