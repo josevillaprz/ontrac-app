@@ -110,3 +110,37 @@ export const DeleteWorkout = async (id) => {
     console.log("workout deleted");
   }
 };
+
+// Weight api requests
+
+export const CreateWeight = async (pounds) => {
+  const response = await fetch("/weight", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      token: localStorage.getItem("accessToken"),
+    },
+    body: JSON.stringify({ pounds }),
+  });
+  if (!response.ok) {
+    console.log("Something went wrong creating a weight");
+  } else {
+    console.log("weight created");
+  }
+};
+
+export const GetWeights = async () => {
+  const response = await fetch(`/weight/${localStorage.getItem("userId")}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      token: localStorage.getItem("accessToken"),
+    },
+  });
+  if (response.status === 204) {
+    console.log("No weights stored in the database.");
+    return [];
+  } else {
+    return await response.json();
+  }
+};

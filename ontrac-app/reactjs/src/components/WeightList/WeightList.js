@@ -3,17 +3,27 @@ import styles from "./WeightList.module.css";
 import { Button } from "@mui/material";
 import WeightLog from "../WeightLog/WeightLog";
 
-const Weightlist = ({ clickHandler }) => {
+const Weightlist = ({ clickHandler, data }) => {
+  const convertDate = (stringDate) => {
+    //"2022-09-24 20:41:24";
+    let formatedDate = stringDate.slice(0, 10).split("-");
+    formatedDate.push(formatedDate.shift());
+    return formatedDate.join("/");
+  };
+
   return (
     <div className={styles.container}>
       <Button onClick={clickHandler} variant="contained" size="large">
         Log Weight
       </Button>
       <ul>
-        <WeightLog weight="180" date="5/5/2022" />
-        <WeightLog weight="180" date="5/5/2022" />
-        <WeightLog weight="180" date="5/5/2022" />
-        <WeightLog weight="180" date="5/5/2022" />
+        {data.map((weight) => (
+          <WeightLog
+            key={weight.id}
+            weight={weight.pounds}
+            date={convertDate(weight.createdAt)}
+          />
+        ))}
       </ul>
     </div>
   );

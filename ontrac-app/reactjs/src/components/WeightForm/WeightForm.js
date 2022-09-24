@@ -1,19 +1,24 @@
 import React from "react";
 import { TextField, Button } from "@mui/material";
 
-const Weightform = ({ clickHandler }) => {
+const Weightform = ({ clickHandler, submitHandler, changeHandler }) => {
   return (
-    <div style={styles.container}>
-      <TextField label="Weight (lbs)" variant="outlined" fullWidth={true} />
+    <form style={styles.container} onSubmit={submitHandler}>
+      <TextField
+        label="Weight (lbs)"
+        variant="outlined"
+        fullWidth={true}
+        onChange={changeHandler}
+      />
       <div style={styles.btnGroup}>
         <Button onClick={clickHandler} variant="outlined" style={styles.btn}>
           Cancel
         </Button>
-        <Button variant="contained" style={styles.btn}>
+        <Button type="submit" variant="contained" style={styles.btn}>
           Save
         </Button>
       </div>
-    </div>
+    </form>
   );
 };
 
