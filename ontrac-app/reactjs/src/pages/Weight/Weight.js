@@ -4,7 +4,7 @@ import WeightList from "../../components/WeightList/WeightList";
 import styles from "../PageStyles.module.css";
 import WeightForm from "../../components/WeightForm/WeightForm";
 import Nav from "../../components/Nav/Nav";
-import { CreateWeight, GetWeights } from "../../utils/api";
+import { CreateWeight, GetWeights, DeleteWeight } from "../../utils/api";
 
 const Weight = () => {
   const [addWeight, setAddWeight] = useState(false);
@@ -35,6 +35,12 @@ const Weight = () => {
     setInputWeight(e.target.value);
   };
 
+  const deleteHandler = async (e) => {
+    let id = e.currentTarget.parentElement.getAttribute("data-id");
+    await DeleteWeight(id);
+    fetchWeights();
+  };
+
   return (
     <div className={styles.container}>
       <Nav />
@@ -50,7 +56,11 @@ const Weight = () => {
             changeHandler={changeHandler}
           />
         ) : (
-          <WeightList clickHandler={handleClick} data={weightData} />
+          <WeightList
+            clickHandler={handleClick}
+            data={weightData}
+            deleteHandler={deleteHandler}
+          />
         )}
       </main>
     </div>

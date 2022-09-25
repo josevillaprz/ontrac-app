@@ -3,7 +3,7 @@ import styles from "./WeightList.module.css";
 import { Button } from "@mui/material";
 import WeightLog from "../WeightLog/WeightLog";
 
-const Weightlist = ({ clickHandler, data }) => {
+const Weightlist = ({ clickHandler, data, deleteHandler }) => {
   const convertDate = (stringDate) => {
     //"2022-09-24 20:41:24";
     let formatedDate = stringDate.slice(0, 10).split("-");
@@ -22,6 +22,8 @@ const Weightlist = ({ clickHandler, data }) => {
             key={weight.id}
             weight={weight.pounds}
             date={convertDate(weight.createdAt)}
+            deleteHandler={deleteHandler}
+            id={weight.id}
           />
         ))}
       </ul>
