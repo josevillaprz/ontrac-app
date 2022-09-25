@@ -23,16 +23,16 @@ exports.createWeight = async (req, res, next) => {
   }
 };
 
-// exports.deleteWeight = async (req, res, next) => {
-//   try {
-//     const weight = await Weight.findByPk(req.params.id);
-//     if (!weight) {
-//       res.status(404).json({ message: "Weight not found" });
-//     } else {
-//       await Weight.destroy({ where: { id: req.params.id } });
-//       res.sendStatus(200);
-//     }
-//   } catch (err) {
-//     next(err);
-//   }
-// };
+exports.deleteWeight = async (req, res, next) => {
+  try {
+    const weight = await Weight.findByPk(req.params.id);
+    if (!weight) {
+      res.status(204).json({ message: "Weight not found" });
+    } else {
+      await Weight.destroy({ where: { id: req.params.id } });
+      res.sendStatus(200);
+    }
+  } catch (err) {
+    next(err);
+  }
+};

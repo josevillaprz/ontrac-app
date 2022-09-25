@@ -144,3 +144,18 @@ export const GetWeights = async () => {
     return await response.json();
   }
 };
+
+export const DeleteWeight = async (id) => {
+  const response = await fetch(`/weight/delete/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      token: localStorage.getItem("accessToken"),
+    },
+  });
+  if (!response.ok) {
+    console.log("there was a problem deleting the weight");
+  } else {
+    console.log("weight deleted");
+  }
+};
