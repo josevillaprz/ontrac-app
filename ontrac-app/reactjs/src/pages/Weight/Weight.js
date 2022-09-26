@@ -48,7 +48,11 @@ const Weight = () => {
         <h1 className={styles.title}>Weight</h1>
         {/* NEED TO SHOW EMPTY STATE ON CHART NOT HERE */}
         {/* FINISH READ AND CREATE*/}
-        {weightData.length !== 0 ? <Chart /> : "NO WEIGHTS"}
+        {weightData.length !== 0 ? (
+          <Chart chartData={weightData} />
+        ) : (
+          "NO WEIGHTS"
+        )}
         {addWeight ? (
           <WeightForm
             clickHandler={handleClick}

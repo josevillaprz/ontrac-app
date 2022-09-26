@@ -6,6 +6,7 @@ import WeightLog from "../WeightLog/WeightLog";
 const Weightlist = ({ clickHandler, data, deleteHandler }) => {
   const convertDate = (stringDate) => {
     //"2022-09-24 20:41:24";
+    // converts to 09/24/2022
     let formatedDate = stringDate.slice(0, 10).split("-");
     formatedDate.push(formatedDate.shift());
     return formatedDate.join("/");

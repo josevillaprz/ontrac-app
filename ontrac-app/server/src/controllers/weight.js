@@ -2,7 +2,10 @@ const { Weight } = require("../models");
 
 exports.getAllWeights = async (req, res, next) => {
   try {
-    const weights = await Weight.findAll({ where: { userId: req.user.id } });
+    const weights = await Weight.findAll({
+      where: { userId: req.user.id },
+      order: [["updatedAt", "ASC"]],
+    });
     if (weights.length === 0) {
       res.sendStatus(204);
     } else {
