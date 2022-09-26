@@ -58,7 +58,7 @@ const Homepage = () => {
               icon={<IoScaleOutline size={60} color={"#fff"} />}
             />
           </div>
-          <Chart />
+          {/* <Chart /> */}
         </main>
       )}
     </div>
