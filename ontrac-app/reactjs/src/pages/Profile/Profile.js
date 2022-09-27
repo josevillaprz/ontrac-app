@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import defaultImg from "../../assets/user-default.png";
 import UserHeader from "../../components/UserHeader/UserHeader";
 import EditBtn from "../../components/Buttons/EditBtn";
@@ -9,6 +9,7 @@ import UserForm from "../../components/UserForm/UserForm";
 import Nav from "../../components/Nav/Nav";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { getUser } from "../../utils/api";
 
 // test data
 const user = {
@@ -16,9 +17,18 @@ const user = {
   name: "jane doe",
   email: "test@example.com",
 };
-
 const Profile = ({ toggleLogin }) => {
   const [editUser, setEditUser] = useState(false);
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  const fetchUser = async () => {
+    let data = await getUser();
+    setUserData(data);
+  };
 
   const handleClick = (e) => {
     setEditUser(!editUser);
@@ -39,8 +49,11 @@ const Profile = ({ toggleLogin }) => {
         <h1 className={pageStyles.title}>Profile</h1>
         <section className={styles.section}>
           <div className={styles.headerContainer}>
-            <UserHeader heading={user.name} subText={user.email} />
-            <EditBtn clickHandler={handleClick} />
+            <UserHeader
+              heading={`${userData.firstName} ${userData.lastName}`}
+              subText={userData.email}
+            />
+            <EditBtn toggleEdit={handleClick} />
           </div>
           {editUser ? <UserForm /> : <UserDetails />}
           <Button
