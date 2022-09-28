@@ -16,6 +16,14 @@ const Profile = ({ toggleLogin }) => {
   const [editUser, setEditUser] = useState(false);
   const [userData, setUserData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [inputData, setInputData] = useState({
+    // firstName: userData.firstName,
+    // lastname: userData.lastName,
+    // // email: userData.email,
+    // firstName: "userData.firstName",
+    // lastName: "userData.lastName",
+    // email: "userData.email",
+  });
 
   useEffect(() => {
     fetchUser();
@@ -40,6 +48,15 @@ const Profile = ({ toggleLogin }) => {
     navigate("/");
   };
 
+  const changeHandler = (e) => {
+    let data = {
+      ...inputData,
+      [e.target.name]: e.target.value,
+    };
+    setInputData(data);
+    console.log(data);
+  };
+
   return (
     <div className={pageStyles.container}>
       <Nav />
@@ -57,7 +74,11 @@ const Profile = ({ toggleLogin }) => {
               <EditBtn toggleEdit={handleClick} />
             </div>
             {editUser ? (
-              <UserForm toggleEdit={handleClick} />
+              <UserForm
+                toggleEdit={handleClick}
+                changeHandler={changeHandler}
+                data={userData}
+              />
             ) : (
               <UserDetails data={userData} />
             )}
