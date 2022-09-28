@@ -55,7 +55,11 @@ const Profile = ({ toggleLogin }) => {
             />
             <EditBtn toggleEdit={handleClick} />
           </div>
-          {editUser ? <UserForm toggleEdit={handleClick} /> : <UserDetails />}
+          {editUser ? (
+            <UserForm toggleEdit={handleClick} />
+          ) : (
+            <UserDetails data={userData} />
+          )}
           <Button
             variant="contained"
             size="large"
