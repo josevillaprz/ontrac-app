@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import defaultImg from "../../assets/user-default.png";
+import React, { useState, useEffect } from "react";
 import UserHeader from "../../components/UserHeader/UserHeader";
 import EditBtn from "../../components/Buttons/EditBtn";
 import pageStyles from "../PageStyles.module.css";
@@ -9,16 +8,25 @@ import UserForm from "../../components/UserForm/UserForm";
 import Nav from "../../components/Nav/Nav";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { getUser } from "../../utils/api";
+import Loader from "../../components/Loader/Loader";
 
 // test data
-const user = {
-  avatar: defaultImg,
-  name: "jane doe",
-  email: "test@example.com",
-};
-
 const Profile = ({ toggleLogin }) => {
   const [editUser, setEditUser] = useState(false);
+  const [userData, setUserData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  const fetchUser = async () => {
+    setIsLoading(true);
+    let data = await getUser();
+    setUserData(data);
+    setIsLoading(false);
+  };
 
   const handleClick = (e) => {
     setEditUser(!editUser);
@@ -35,24 +43,35 @@ const Profile = ({ toggleLogin }) => {
   return (
     <div className={pageStyles.container}>
       <Nav />
-      <main className={pageStyles.contentContainer}>
-        <h1 className={pageStyles.title}>Profile</h1>
-        <section className={styles.section}>
-          <div className={styles.headerContainer}>
-            <UserHeader heading={user.name} subText={user.email} />
-            <EditBtn clickHandler={handleClick} />
-          </div>
-          {editUser ? <UserForm /> : <UserDetails />}
-          <Button
-            variant="contained"
-            size="large"
-            style={styles.btn}
-            onClick={logoutHandler}
-          >
-            Logout
-          </Button>
-        </section>
-      </main>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <main className={pageStyles.contentContainer}>
+          <h1 className={pageStyles.title}>Profile</h1>
+          <section className={styles.section}>
+            <div className={styles.headerContainer}>
+              <UserHeader
+                heading={`${userData.firstName} ${userData.lastName}`}
+                subText={userData.email}
+              />
+              <EditBtn toggleEdit={handleClick} />
+            </div>
+            {editUser ? (
+              <UserForm toggleEdit={handleClick} />
+            ) : (
+              <UserDetails data={userData} />
+            )}
+            <Button
+              variant="contained"
+              size="large"
+              style={styles.btn}
+              onClick={logoutHandler}
+            >
+              Logout
+            </Button>
+          </section>
+        </main>
+      )}
     </div>
   );
 };

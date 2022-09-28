@@ -1,8 +1,9 @@
 import React from "react";
 // import styles from "./UserForm.module.css";
-import { TextField, Button } from "@mui/material";
+import { TextField } from "@mui/material";
+import Btn from "../Buttons/Btn";
 
-const Userform = () => {
+const Userform = ({ toggleEdit }) => {
   return (
     <form style={styles.container}>
       <h2 style={styles.title}>Edit</h2>
@@ -26,9 +27,10 @@ const Userform = () => {
           style={styles.input}
         />
       </div>
-      <Button style={styles.btn} variant="contained" size="large">
-        Save
-      </Button>
+      <div style={styles.btnGroup}>
+        <Btn text="Cancel" variant="outlined" clickHandler={toggleEdit} />
+        <Btn text="Save" variant="contained" />
+      </div>
     </form>
   );
 };
@@ -57,5 +59,12 @@ const styles = {
 
   title: {
     fontWeight: "600",
+  },
+
+  btnGroup: {
+    display: "flex",
+    gap: "10px",
+    justifyContent: "flex-end",
+    margin: "20px 0",
   },
 };

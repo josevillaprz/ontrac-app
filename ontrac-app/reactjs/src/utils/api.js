@@ -1,3 +1,20 @@
+// USER API REQUESTS
+export const getUser = async () => {
+  const response = await fetch("/user", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      token: localStorage.getItem("accessToken"),
+    },
+  });
+  if (!response.ok) {
+    console.log("something went wrong fetching that user");
+  } else {
+    const data = await response.json();
+    return data;
+  }
+};
+
 //  EXERCISE API REQUESTS
 export const CreateExercise = async (data) => {
   console.log("creating exercise...", data);
