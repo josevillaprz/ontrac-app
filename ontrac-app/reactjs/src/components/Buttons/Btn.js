@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import styles from "./Btn.module.css";
 
-const Btn = ({ variant, fullWidth, type, text }) => {
+const Btn = ({ variant, fullWidth, type, text, clickHandler }) => {
   return (
     <>
       <Button
@@ -11,6 +11,7 @@ const Btn = ({ variant, fullWidth, type, text }) => {
         fullWidth={fullWidth}
         type={type}
         className={styles.btn}
+        onClick={clickHandler}
       >
         {text}
       </Button>
