@@ -11,7 +11,7 @@ const Weight = () => {
   const [addWeight, setAddWeight] = useState(false);
   const [weightData, setWeightData] = useState([]);
   const [inputWeight, setInputWeight] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchWeights();

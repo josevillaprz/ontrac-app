@@ -12,11 +12,10 @@ import {
 } from "../../utils/api";
 
 const Workout = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [workouts, setWorkouts] = useState([]);
   const [exercises, setExercises] = useState([]);
   const [active, setActive] = useState("list");
-  const [toggleFetch, setToggleFetch] = useState(false);
   const [inputData, setInputData] = useState({
     userId: 1,
     name: "",
@@ -63,12 +62,12 @@ const Workout = () => {
     e.preventDefault();
     await CreateWorkout(inputData);
     toggleList();
-    setToggleFetch(!toggleFetch);
+    fetchData();
   };
 
   const deleteHandler = async (e) => {
     await DeleteWorkout(e.currentTarget.id);
-    setToggleFetch(!toggleFetch);
+    fetchData();
   };
 
   return (
