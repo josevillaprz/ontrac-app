@@ -1,14 +1,24 @@
 import React from "react";
 import styles from "./ExerciseList.module.css";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 import Exercise from "../Exercise/Exercise";
+import EmptyState from "../EmptyState/EmptyState";
+import Btn from "../Buttons/Btn";
 
 const Exerciselist = ({ toggle, toggleEdit, exercises, deleteHandler }) => {
   return (
     <section className={styles.container}>
-      <Button variant="contained" size="large" onClick={toggle}>
-        Add exercise
-      </Button>
+      <Btn
+        variant="contained"
+        size="large"
+        clickHandler={toggle}
+        text="Add Exercise"
+        className={styles.btn}
+      />
+      <EmptyState
+        title="No Exercises"
+        body="You don't have any saved exercises. Start by creating a new exercise. "
+      />
       <ul>
         {exercises.map((exercise) => (
           <Exercise
