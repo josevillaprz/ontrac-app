@@ -15,7 +15,7 @@ import Loader from "../../components/Loader/Loader";
 const Profile = ({ toggleLogin }) => {
   const [editUser, setEditUser] = useState(false);
   const [userData, setUserData] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [inputData, setInputData] = useState({});
 
   useEffect(() => {
