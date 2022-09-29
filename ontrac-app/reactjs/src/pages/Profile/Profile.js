@@ -8,14 +8,15 @@ import UserForm from "../../components/UserForm/UserForm";
 import Nav from "../../components/Nav/Nav";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../../utils/api";
+import { getUser, updateUser } from "../../utils/api";
 import Loader from "../../components/Loader/Loader";
 
 // test data
 const Profile = ({ toggleLogin }) => {
   const [editUser, setEditUser] = useState(false);
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [inputData, setInputData] = useState({});
 
   useEffect(() => {
     fetchUser();
@@ -29,6 +30,9 @@ const Profile = ({ toggleLogin }) => {
   };
 
   const handleClick = (e) => {
+    // reset input data
+    setInputData({});
+    // toggle edit state for conditional rendering
     setEditUser(!editUser);
   };
 
@@ -38,6 +42,26 @@ const Profile = ({ toggleLogin }) => {
     localStorage.clear();
     toggleLogin();
     navigate("/");
+  };
+
+  const changeHandler = (e) => {
+    let data = {
+      ...inputData,
+      [e.target.name]: e.target.value,
+    };
+    setInputData(data);
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (Object.entries(inputData).length === 0) {
+      console.log("nothing to update");
+    } else {
+      console.log(inputData);
+      await updateUser(inputData, userData.id);
+      fetchUser();
+      setEditUser(!editUser);
+    }
   };
 
   return (
@@ -57,7 +81,12 @@ const Profile = ({ toggleLogin }) => {
               <EditBtn toggleEdit={handleClick} />
             </div>
             {editUser ? (
-              <UserForm toggleEdit={handleClick} />
+              <UserForm
+                toggleEdit={handleClick}
+                changeHandler={changeHandler}
+                submitHandler={submitHandler}
+                data={userData}
+              />
             ) : (
               <UserDetails data={userData} />
             )}

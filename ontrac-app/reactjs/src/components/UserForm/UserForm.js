@@ -3,33 +3,39 @@ import React from "react";
 import { TextField } from "@mui/material";
 import Btn from "../Buttons/Btn";
 
-const Userform = ({ toggleEdit }) => {
+const Userform = ({ toggleEdit, changeHandler, data, submitHandler }) => {
   return (
-    <form style={styles.container}>
+    <form style={styles.container} onSubmit={submitHandler}>
       <h2 style={styles.title}>Edit</h2>
       <div style={styles.inputsContainer}>
         <TextField
           id="outlined-read-only-input"
-          label="Name"
-          defaultValue="Jane"
+          label="First name"
+          defaultValue={data.firstName}
           style={styles.input}
+          onChange={changeHandler}
+          name="firstName"
+        />
+        <TextField
+          id="outlined-read-only-input"
+          label="Last Name"
+          defaultValue={data.lastName}
+          style={styles.input}
+          onChange={changeHandler}
+          name="lastName"
         />
         <TextField
           id="outlined-read-only-input"
           label="Email"
-          defaultValue="email@.com"
+          defaultValue={data.email}
           style={styles.input}
-        />
-        <TextField
-          id="outlined-read-only-input"
-          label="Weight"
-          defaultValue="210"
-          style={styles.input}
+          onChange={changeHandler}
+          name="email"
         />
       </div>
       <div style={styles.btnGroup}>
         <Btn text="Cancel" variant="outlined" clickHandler={toggleEdit} />
-        <Btn text="Save" variant="contained" />
+        <Btn type="submit" text="Save" variant="contained" />
       </div>
     </form>
   );

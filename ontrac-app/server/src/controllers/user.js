@@ -37,8 +37,7 @@ exports.getUser = async (req, res, next) => {
 exports.updateUser = async (req, res, next) => {
   try {
     // look for user in the database
-    const user = await User.findByPk(req.user.id);
-    // if no user is found respond with not found
+    const user = await User.findByPk(req.params.id);
     if (!user) {
       res.json({ message: "User not found" });
     } else {
