@@ -15,6 +15,7 @@ const Exercise = ({ user }) => {
   const [editExerciseId, setEditExerciseId] = useState(0);
 
   const FetchExercises = async () => {
+    setIsLoading(true);
     const data = await GetAllExercises();
     setExercises(data);
     setIsLoading(false);
@@ -22,7 +23,7 @@ const Exercise = ({ user }) => {
 
   useEffect(() => {
     FetchExercises();
-  }, [active]);
+  }, []);
 
   const ToggleCreate = (e) => {
     setActive("create");
@@ -48,9 +49,7 @@ const Exercise = ({ user }) => {
     <div className={styles.container}>
       <Nav />
       {isLoading ? (
-        <main>
-          <Loader />
-        </main>
+        <Loader />
       ) : (
         <main>
           {active === "list" && (
