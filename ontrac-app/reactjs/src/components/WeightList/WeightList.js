@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./WeightList.module.css";
 import { Button } from "@mui/material";
 import WeightLog from "../WeightLog/WeightLog";
+import EmptyState from "../EmptyState/EmptyState";
 
 const Weightlist = ({ clickHandler, data, deleteHandler }) => {
   const convertDate = (stringDate) => {
@@ -17,6 +18,10 @@ const Weightlist = ({ clickHandler, data, deleteHandler }) => {
       <Button onClick={clickHandler} variant="contained" size="large">
         Log Weight
       </Button>
+      <EmptyState
+        title="No weights logged"
+        body="Start tracking your body weight goals by logging a weight."
+      />
       <ul>
         {data.map((weight) => (
           <WeightLog
