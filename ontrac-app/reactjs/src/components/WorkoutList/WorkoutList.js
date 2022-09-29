@@ -3,6 +3,7 @@ import Workout from "../Workout/Workout";
 // import Btn from "../Buttons/Btn";
 import styles from "./WorkoutList.module.css";
 import { Grid, Button } from "@mui/material";
+import EmptyState from "../EmptyState/EmptyState";
 
 const Workoutlist = ({ clickHandler, workouts, deleteHandler }) => {
   return (
@@ -16,13 +17,11 @@ const Workoutlist = ({ clickHandler, workouts, deleteHandler }) => {
         Add Workout
       </Button>
       {workouts.length === 0 ? (
-        <div className={styles.emptyContainer}>
-          <h2>Create a Workout.</h2>
-          <p>
-            You don't have any saved workouts. Start by creating a new work out
-            from your saved exercise.
-          </p>
-        </div>
+        <EmptyState
+          body="You don't have any saved workouts. Start by creating a new work out
+        from your saved exercise."
+          title="No workouts"
+        />
       ) : (
         <Grid container spacing={3} className={styles.listContainer}>
           {workouts.map((workout) => (
