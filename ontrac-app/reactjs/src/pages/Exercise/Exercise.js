@@ -23,7 +23,7 @@ const Exercise = ({ user }) => {
 
   useEffect(() => {
     FetchExercises();
-  }, []);
+  }, [active]);
 
   const ToggleCreate = (e) => {
     setActive("create");
