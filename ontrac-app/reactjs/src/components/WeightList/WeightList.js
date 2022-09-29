@@ -18,21 +18,24 @@ const Weightlist = ({ clickHandler, data, deleteHandler }) => {
       <Button onClick={clickHandler} variant="contained" size="large">
         Log Weight
       </Button>
-      <EmptyState
-        title="No weights logged"
-        body="Start tracking your body weight goals by logging a weight."
-      />
-      <ul>
-        {data.map((weight) => (
-          <WeightLog
-            key={weight.id}
-            weight={weight.pounds}
-            date={convertDate(weight.createdAt)}
-            deleteHandler={deleteHandler}
-            id={weight.id}
-          />
-        ))}
-      </ul>
+      {data.length === 0 ? (
+        <EmptyState
+          title="No weights logged"
+          body="Start tracking your body weight goals by logging a weight."
+        />
+      ) : (
+        <ul>
+          {data.map((weight) => (
+            <WeightLog
+              key={weight.id}
+              weight={weight.pounds}
+              date={convertDate(weight.createdAt)}
+              deleteHandler={deleteHandler}
+              id={weight.id}
+            />
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

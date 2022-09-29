@@ -53,7 +53,8 @@ const Weight = () => {
       ) : (
         <main className={styles.contentContainer}>
           <h1 className={styles.title}>Weight</h1>
-          {weightData.length !== 0 && <Chart chartData={weightData} />}
+          {/* {weightData.length !== 0 && <Chart chartData={weightData} />} */}
+          <Chart chartData={weightData} />
           {addWeight ? (
             <WeightForm
               clickHandler={handleClick}
