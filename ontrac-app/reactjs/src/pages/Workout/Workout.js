@@ -12,7 +12,7 @@ import {
 } from "../../utils/api";
 
 const Workout = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [workouts, setWorkouts] = useState([]);
   const [exercises, setExercises] = useState([]);
   const [active, setActive] = useState("list");
@@ -22,6 +22,19 @@ const Workout = () => {
     name: "",
     exerciseIds: [],
   });
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    const workoutData = await GetUserWorkouts(localStorage.getItem("userId"));
+    const exerciseData = await GetAllExercises();
+    setWorkouts(workoutData);
+    setExercises(exerciseData);
+    setIsLoading(false);
+  };
 
   const toggleList = (e) => {
     if (active === "list") {
@@ -45,22 +58,6 @@ const Workout = () => {
   const nameChangeHandler = (e) => {
     setInputData({ ...inputData, name: e.target.value });
   };
-
-  const fetchWorkout = async () => {
-    const data = await GetUserWorkouts(localStorage.getItem("userId"));
-    setWorkouts(data);
-  };
-
-  const fetchExercises = async () => {
-    const data = await GetAllExercises();
-    setExercises(data);
-  };
-
-  useEffect(() => {
-    fetchWorkout();
-    fetchExercises();
-    setIsLoading(false);
-  }, [toggleFetch]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
