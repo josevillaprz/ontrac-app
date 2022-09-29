@@ -4,20 +4,24 @@ import WeightList from "../../components/WeightList/WeightList";
 import styles from "../PageStyles.module.css";
 import WeightForm from "../../components/WeightForm/WeightForm";
 import Nav from "../../components/Nav/Nav";
+import Loader from "../../components/Loader/Loader";
 import { CreateWeight, GetWeights, DeleteWeight } from "../../utils/api";
 
 const Weight = () => {
   const [addWeight, setAddWeight] = useState(false);
   const [weightData, setWeightData] = useState([]);
   const [inputWeight, setInputWeight] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchWeights();
   }, [addWeight]);
 
   const fetchWeights = async () => {
+    setIsLoading(true);
     let data = await GetWeights();
     setWeightData(data);
+    setIsLoading(false);
   };
 
   const handleClick = (e) => {
@@ -44,29 +48,33 @@ const Weight = () => {
   return (
     <div className={styles.container}>
       <Nav />
-      <main className={styles.contentContainer}>
-        <h1 className={styles.title}>Weight</h1>
-        {/* NEED TO SHOW EMPTY STATE ON CHART NOT HERE */}
-        {/* FINISH READ AND CREATE*/}
-        {weightData.length !== 0 ? (
-          <Chart chartData={weightData} />
-        ) : (
-          "NO WEIGHTS"
-        )}
-        {addWeight ? (
-          <WeightForm
-            clickHandler={handleClick}
-            submitHandler={handleSubmit}
-            changeHandler={changeHandler}
-          />
-        ) : (
-          <WeightList
-            clickHandler={handleClick}
-            data={weightData}
-            deleteHandler={deleteHandler}
-          />
-        )}
-      </main>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <main className={styles.contentContainer}>
+          <h1 className={styles.title}>Weight</h1>
+          {/* NEED TO SHOW EMPTY STATE ON CHART NOT HERE */}
+          {/* FINISH READ AND CREATE*/}
+          {weightData.length !== 0 ? (
+            <Chart chartData={weightData} />
+          ) : (
+            "NO WEIGHTS"
+          )}
+          {addWeight ? (
+            <WeightForm
+              clickHandler={handleClick}
+              submitHandler={handleSubmit}
+              changeHandler={changeHandler}
+            />
+          ) : (
+            <WeightList
+              clickHandler={handleClick}
+              data={weightData}
+              deleteHandler={deleteHandler}
+            />
+          )}
+        </main>
+      )}
     </div>
   );
 };
