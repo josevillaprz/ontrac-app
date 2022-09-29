@@ -15,6 +15,22 @@ export const getUser = async () => {
   }
 };
 
+export const updateUser = async (data, id) => {
+  const response = await fetch(`/user/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      token: localStorage.getItem("accessToken"),
+    },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    console.log("Something went wrong updating that user");
+  } else {
+    console.log("Info updated");
+  }
+};
+
 //  EXERCISE API REQUESTS
 export const CreateExercise = async (data) => {
   console.log("creating exercise...", data);

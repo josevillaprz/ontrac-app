@@ -3,9 +3,9 @@ import React from "react";
 import { TextField } from "@mui/material";
 import Btn from "../Buttons/Btn";
 
-const Userform = ({ toggleEdit, changeHandler, data }) => {
+const Userform = ({ toggleEdit, changeHandler, data, submitHandler }) => {
   return (
-    <form style={styles.container}>
+    <form style={styles.container} onSubmit={submitHandler}>
       <h2 style={styles.title}>Edit</h2>
       <div style={styles.inputsContainer}>
         <TextField
@@ -35,7 +35,7 @@ const Userform = ({ toggleEdit, changeHandler, data }) => {
       </div>
       <div style={styles.btnGroup}>
         <Btn text="Cancel" variant="outlined" clickHandler={toggleEdit} />
-        <Btn text="Save" variant="contained" />
+        <Btn type="submit" text="Save" variant="contained" />
       </div>
     </form>
   );
