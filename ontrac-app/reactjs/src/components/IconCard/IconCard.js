@@ -3,10 +3,10 @@ import styles from "./IconCard.module.css";
 
 const Iconcard = ({ icon, value, text }) => {
   return (
-    <div className={styles.container}>
+    <div className={styles.card}>
       {icon}
-      <p className={styles.value}>{value}</p>
-      <p className={styles.text}>{text}</p>
+      <p className={styles.card__text}>{value}</p>
+      <p className={styles.card__value}>{text}</p>
     </div>
   );
 };

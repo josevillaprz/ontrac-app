@@ -1,23 +1,20 @@
-.container {
+.card {
     background-color: #2F2F2F;
+    width: 50%;
     border-radius: 15px;
-    width: calc(100% /3 - 50px);
-    min-width: 240px;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
     flex-direction: column;
-    padding: 40px 0;
-    margin: 20px 0 50px 0;
-    box-shadow: 0 10px 20px #7C7C7C
+    box-shadow: 0 10px 20px #7C7C7C;
+    padding: 25px 0;
 }
 
-.text {
+.card__value {
     margin-top: 10px;
     color: #fff;
 }
 
-.value {
+.card__text {
     margin-top: 20px;
     color: #FAA486;
     font-weight: 500;
