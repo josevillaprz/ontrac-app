@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import UserHeader from "../../components/UserHeader/UserHeader";
-import Chart from "../../components/Chart/Chart";
+// import Chart from "../../components/Chart/Chart";
 import IconCard from "../../components/IconCard/IconCard";
 import homeStyles from "./Homepage.module.css";
 import styles from "../PageStyles.module.css";
 import { BiDumbbell, BiCalendarEvent } from "react-icons/bi";
-import { IoScaleOutline } from "react-icons/io5";
 import Nav from "../../components/Nav/Nav";
 import Loader from "../../components/Loader/Loader";
 
@@ -51,11 +50,6 @@ const Homepage = () => {
               value={user.Workouts.length}
               text="Workouts"
               icon={<BiCalendarEvent size={60} color={"#fff"} />}
-            />
-            <IconCard
-              value="180"
-              text="Current Weight"
-              icon={<IoScaleOutline size={60} color={"#fff"} />}
             />
           </div>
           {/* <Chart /> */}
