@@ -36,10 +36,10 @@ const Homepage = () => {
       {isLoading ? (
         <main>
           <Loader />
-        </main> // Will need to update to blank state
+        </main>
       ) : (
         <main>
-          <UserHeader heading={`Welcome back, ${user.firstName}`} />
+          <UserHeader heading={`Welcome back, ${user.firstName}.`} />
           <div className={homeStyles.cardGroup}>
             <IconCard
               value={user.Exercises.length}
