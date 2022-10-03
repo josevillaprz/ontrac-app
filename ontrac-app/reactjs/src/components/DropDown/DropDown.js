@@ -3,11 +3,12 @@ import { MenuItem, Select, InputLabel, FormControl } from "@mui/material";
 import { BiTrash } from "react-icons/bi";
 
 // dummy data
-const DropDown = ({ exercises }) => {
+const DropDown = ({ exercises, exerciseChangeHandler, index }) => {
   const [exercise, setExercise] = React.useState("");
 
-  const handleChange = (event) => {
-    setExercise(event.target.value);
+  const handleChange = (e) => {
+    setExercise(e.target.value);
+    exerciseChangeHandler(e);
   };
 
   return (
@@ -15,14 +16,15 @@ const DropDown = ({ exercises }) => {
       <InputLabel id="demo-simple-select-label">Exercise</InputLabel>
       <Select
         style={styles.select}
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
         value={exercise}
         onChange={handleChange}
         fullWidth={true}
+        name={`exercise-${index}`}
       >
-        {exercises.map((exercise) => (
-          <MenuItem value={exercise.name}>{exercise.name}</MenuItem>
+        {exercises.map((exercise, i) => (
+          <MenuItem value={exercise.id} key={exercise.id}>
+            {exercise.name}
+          </MenuItem>
         ))}
       </Select>
       <button style={styles.btn} type="button">

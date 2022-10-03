@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./WeightLog.module.css";
-import EditBtn from "../Buttons/EditBtn";
+import DeleteBtn from "../Buttons/DeleteBtn";
 
-const Weightlog = ({ weight, date }) => {
+const Weightlog = ({ weight, date, deleteHandler, id }) => {
   return (
-    <li className={styles.container}>
+    <li className={styles.container} data-id={id}>
       <div className={styles.detailsContainer}>
         <p className={styles.weight}>
           <span className={styles.label}>Weight: </span>
@@ -12,7 +12,7 @@ const Weightlog = ({ weight, date }) => {
         </p>
         <p className={styles.date}>Date: {date}</p>
       </div>
-      <EditBtn />
+      <DeleteBtn deleteHandler={deleteHandler} />
     </li>
   );
 };

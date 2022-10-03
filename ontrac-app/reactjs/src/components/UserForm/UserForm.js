@@ -1,34 +1,45 @@
 import React from "react";
 // import styles from "./UserForm.module.css";
-import { TextField, Button } from "@mui/material";
+import { TextField } from "@mui/material";
+import Btn from "../Buttons/Btn";
 
-const Userform = () => {
+const Userform = ({ toggleEdit, changeHandler, data, submitHandler }) => {
   return (
-    <form style={styles.container}>
+    <form style={styles.container} onSubmit={submitHandler}>
       <h2 style={styles.title}>Edit</h2>
       <div style={styles.inputsContainer}>
         <TextField
           id="outlined-read-only-input"
-          label="Name"
-          defaultValue="Jane"
+          label="First name"
+          defaultValue={data.firstName}
           style={styles.input}
+          onChange={changeHandler}
+          name="firstName"
+          fullWidth={true}
+        />
+        <TextField
+          id="outlined-read-only-input"
+          label="Last Name"
+          defaultValue={data.lastName}
+          style={styles.input}
+          onChange={changeHandler}
+          name="lastName"
+          fullWidth={true}
         />
         <TextField
           id="outlined-read-only-input"
           label="Email"
-          defaultValue="email@.com"
+          defaultValue={data.email}
           style={styles.input}
-        />
-        <TextField
-          id="outlined-read-only-input"
-          label="Weight"
-          defaultValue="210"
-          style={styles.input}
+          onChange={changeHandler}
+          name="email"
+          fullWidth={true}
         />
       </div>
-      <Button style={styles.btn} variant="contained" size="large">
-        Save
-      </Button>
+      <div style={styles.btnGroup}>
+        <Btn text="Cancel" variant="outlined" clickHandler={toggleEdit} />
+        <Btn type="submit" text="Save" variant="contained" />
+      </div>
     </form>
   );
 };
@@ -43,12 +54,11 @@ const styles = {
 
   inputsContainer: {
     display: "flex",
-    flexWrap: "wrap",
+    flexDirection: "column",
   },
 
   input: {
-    margin: "20px 40px 20px 0",
-    width: "calc(50% - 60px)",
+    marginBottom: "40px",
   },
 
   btn: {
@@ -57,5 +67,13 @@ const styles = {
 
   title: {
     fontWeight: "600",
+    marginBottom: "40px",
+  },
+
+  btnGroup: {
+    display: "flex",
+    gap: "10px",
+    justifyContent: "flex-end",
+    margin: "20px 0",
   },
 };

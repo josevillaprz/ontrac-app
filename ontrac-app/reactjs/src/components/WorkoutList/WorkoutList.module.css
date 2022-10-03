@@ -5,3 +5,15 @@
     border-radius: 15px;
     max-width: 1200px;
 }
+
+.emptyContainer {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.emptyContainer p {
+    color: #737885;
+    max-width: 500px
+}

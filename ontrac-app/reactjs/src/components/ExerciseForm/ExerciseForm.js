@@ -1,71 +1,66 @@
 import React from "react";
 import { TextField, Button } from "@mui/material";
 
-const ExerciseForm = ({
-  clickHandler,
-  submitHandler,
-  nameHandler,
-  repsHandler,
-  setsHandler,
-  poundsHandler,
-  noteHandler,
-}) => {
+const ExerciseForm = ({ toggle, submitHandler, changeHandler, data }) => {
   return (
-    <div style={styles.container}>
-      <form onSubmit={submitHandler} style={styles.formContainer}>
+    <form onSubmit={submitHandler} style={styles.container}>
+      <TextField
+        name="name"
+        label="Exercise name"
+        variant="outlined"
+        fullWidth={true}
+        style={styles.input}
+        onChange={changeHandler}
+        value={data && data.name}
+      />
+      <div style={styles.horizontalInput}>
         <TextField
-          label="Exercise name"
+          name="sets"
+          label="Sets"
           variant="outlined"
-          fullWidth={true}
           style={styles.input}
-          onChange={nameHandler}
+          onChange={changeHandler}
+          value={data && data.sets}
         />
-        <div style={styles.horizontalInput}>
-          <TextField
-            label="Sets"
-            variant="outlined"
-            style={styles.input}
-            onChange={setsHandler}
-          />
-          <TextField
-            label="Reps"
-            variant="outlined"
-            style={styles.input}
-            onChange={repsHandler}
-          />
-          <TextField
-            label="Lbs"
-            variant="outlined"
-            style={styles.input}
-            onChange={poundsHandler}
-          />
-        </div>
         <TextField
-          label="Notes"
+          name="reps"
+          label="Reps"
           variant="outlined"
-          multiline={true}
-          fullWidth={true}
           style={styles.input}
-          onChange={noteHandler}
+          onChange={changeHandler}
+          value={data && data.reps}
         />
-        <Button
+        <TextField
+          name="pounds"
+          label="Lbs"
           variant="outlined"
-          size="large"
-          style={styles.btn}
-          onClick={clickHandler}
-        >
-          Cancel
-        </Button>
-        <Button
-          variant="contained"
-          type="submit"
-          size="large"
-          style={styles.btn}
-        >
-          Save
-        </Button>
-      </form>
-    </div>
+          style={styles.input}
+          onChange={changeHandler}
+          value={data && data.pounds}
+        />
+      </div>
+      <TextField
+        name="note"
+        label="Notes"
+        variant="outlined"
+        multiline={true}
+        fullWidth={true}
+        style={styles.input}
+        onChange={changeHandler}
+        value={data && data.note}
+      />
+      <Button
+        variant="outlined"
+        size="large"
+        style={styles.btn}
+        onClick={toggle}
+      >
+        Cancel
+      </Button>
+      <Button variant="contained" type="submit" size="large" style={styles.btn}>
+        Save
+      </Button>
+    </form>
   );
 };
 
@@ -73,17 +68,6 @@ export default ExerciseForm;
 
 const styles = {
   container: {
-    maxWidth: "1200px",
-    backgroundColor: "#fff",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    borderRadius: "15px",
-    boxShadow: "0 10px 20px #D0D8E8",
-    padding: "60px",
-  },
-
-  formContainer: {
     width: "100%",
   },
 

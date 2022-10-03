@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import UserHeader from "../../components/UserHeader/UserHeader";
-import Chart from "../../components/Chart/Chart";
+// import Chart from "../../components/Chart/Chart";
 import IconCard from "../../components/IconCard/IconCard";
 import homeStyles from "./Homepage.module.css";
 import styles from "../PageStyles.module.css";
 import { BiDumbbell, BiCalendarEvent } from "react-icons/bi";
-import { IoScaleOutline } from "react-icons/io5";
 import Nav from "../../components/Nav/Nav";
+import Loader from "../../components/Loader/Loader";
 
 const Homepage = () => {
   const [user, setUser] = useState({});
@@ -34,10 +34,13 @@ const Homepage = () => {
     <div className={styles.container}>
       <Nav />
       {isLoading ? (
-        <div>loading...</div> // Will need to update to blank state
+        <main>
+          <Loader />
+        </main>
       ) : (
-        <main className={styles.contentContainer}>
-          <UserHeader heading={`Welcome back, ${user.firstName}`} />
+        <main>
+          <UserHeader heading={`Welcome back, ${user.firstName}.`} />
+          <h2 className={homeStyles.h2}>Your activity</h2>
           <div className={homeStyles.cardGroup}>
             <IconCard
               value={user.Exercises.length}
@@ -49,13 +52,8 @@ const Homepage = () => {
               text="Workouts"
               icon={<BiCalendarEvent size={60} color={"#fff"} />}
             />
-            <IconCard
-              value="180"
-              text="Current Weight"
-              icon={<IoScaleOutline size={60} color={"#fff"} />}
-            />
           </div>
-          <Chart />
+          {/* <Chart /> */}
         </main>
       )}
     </div>

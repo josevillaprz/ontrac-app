@@ -3,77 +3,101 @@ import WorkoutList from "../../components/WorkoutList/WorkoutList";
 import WorkoutForm from "../../components/WorkoutForm/WorkoutForm";
 import styles from "../PageStyles.module.css";
 import Nav from "../../components/Nav/Nav";
+import Loader from "../../components/Loader/Loader";
+import {
+  GetUserWorkouts,
+  GetAllExercises,
+  CreateWorkout,
+  DeleteWorkout,
+} from "../../utils/api";
 
 const Workout = () => {
-  const [addWorkout, setAddWorkout] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [workouts, setWorkouts] = useState([]);
   const [exercises, setExercises] = useState([]);
-  // const [selectedExercises, setSelectedExercises] = useState([]);
-  // const [workoutName, setWorkoutName] = useState("");
+  const [active, setActive] = useState("list");
+  const [inputData, setInputData] = useState({
+    userId: 1,
+    name: "",
+    exerciseIds: [],
+  });
 
-  const handleClick = (e) => {
-    setAddWorkout(!addWorkout);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    const workoutData = await GetUserWorkouts(localStorage.getItem("userId"));
+    const exerciseData = await GetAllExercises();
+    setWorkouts(workoutData);
+    setExercises(exerciseData);
+    setIsLoading(false);
   };
 
-  // get workouts with userID
-  useEffect(() => {
-    const fetchWorkout = async () => {
-      const response = await fetch(
-        `/workout/all/${localStorage.getItem("userId")}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            token: localStorage.getItem("accessToken"),
-          },
-          method: "GET",
-        }
-      );
-      const data = await response.json();
-      setWorkouts(data);
-      setIsLoading(false);
-    };
-    fetchWorkout();
-  }, []);
-
-  // get all exercises
-  useEffect(() => {
-    const fetchExercises = async () => {
-      const response = await fetch("/exercise/all", {
-        headers: {
-          "Content-Type": "application/json",
-          token: `${localStorage.getItem("accessToken")}`,
-        },
-        method: "GET",
+  const toggleList = (e) => {
+    if (active === "list") {
+      setActive("create");
+    } else {
+      setActive("list");
+      setInputData({
+        name: "",
+        exerciseIds: [],
       });
-      const data = await response.json();
-      setExercises(data);
-    };
-    // call function
-    fetchExercises();
-  }, []);
+    }
+  };
 
-  // handle post request
-  const handleSubmit = async () => {
-    //
+  const exerciseChangeHandler = (e) => {
+    setInputData({
+      ...inputData,
+      exerciseIds: [...inputData.exerciseIds, e.target.value],
+    });
+  };
+
+  const nameChangeHandler = (e) => {
+    setInputData({ ...inputData, name: e.target.value });
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    await CreateWorkout(inputData);
+    toggleList();
+    fetchData();
+  };
+
+  const deleteHandler = async (e) => {
+    await DeleteWorkout(e.currentTarget.id);
+    fetchData();
   };
 
   return (
     <div className={styles.container}>
       <Nav />
       {isLoading ? (
-        <div>Loading...</div>
+        <Loader />
       ) : (
         <main className={styles.contentContainer}>
-          <h1 className={styles.title}>Workouts</h1>
-          {addWorkout ? (
-            <WorkoutForm
-              clickHandler={handleClick}
-              submitHandler={handleSubmit}
-              exercises={exercises}
-            />
-          ) : (
-            <WorkoutList clickHandler={handleClick} workouts={workouts} />
+          {active === "list" && (
+            <>
+              <h1 className={styles.title}>Workouts</h1>
+              <WorkoutList
+                workouts={workouts}
+                clickHandler={toggleList}
+                deleteHandler={deleteHandler}
+              />
+            </>
+          )}
+          {active === "create" && (
+            <>
+              <h1 className={styles.title}>Create Workout</h1>
+              <WorkoutForm
+                clickHandler={toggleList}
+                submitHandler={submitHandler}
+                exercises={exercises}
+                exerciseChangeHandler={exerciseChangeHandler}
+                nameChangeHandler={nameChangeHandler}
+              />
+            </>
           )}
         </main>
       )}

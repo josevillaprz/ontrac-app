@@ -5,3 +5,7 @@
     box-shadow: 0 10px 20px #D0D8E8;
     max-width: 1200px;
 }
+
+.container>Button {
+    margin-bottom: 24px;
+}
