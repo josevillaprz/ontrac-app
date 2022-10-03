@@ -1,6 +1,6 @@
 .section {
     background-color: #fff;
-    padding: 40px;
+    padding: 20px;
     box-shadow: 0 10px 20px #D0D8E8;
     border-radius: 15px;
     max-width: 1200px;
@@ -10,4 +10,40 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 40px;
+}
+
+.headerName {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.headerName h2 {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.headerName p {
+    font-size: 14px;
+    font-weight: 300;
+    color: #737885;
+}
+
+@media screen and (min-width: 760px) {
+    .section {
+        padding: 40px
+    }
+
+    .headerName {
+        gap: 35px
+    }
+
+    .headerName h2 {
+        font-size: 32px;
+    }
+
+    .headerName p {
+        font-size: 16px;
+    }
 }
