@@ -8,9 +8,9 @@
     "server-install": "cd server && npm install",
     "build-reactjs": "cd reactjs && npm run build",
     "build-api": " cd server && npm run db-update",
-    "dev": "npm:start-*",
+    "dev": "concurrently \"npm:start-server\" \"npm:start-client\"",
     "start-server": "cd server && npm run dev",
-    "start-client": "cd reactjs && npm start",
+    "start-client": "cd reactjs && npm run start",
     "install-all-deps": "concurrently \"npm:server-install\" \"npm:client-install\"",
     "start": "npm run start-server",
     "heroku-postbuild": "concurrently \"npm:install-all-deps\" \" npm:build-*\""
