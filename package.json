@@ -13,12 +13,15 @@
     "start-client": "cd reactjs && npm run start",
     "install-all-deps": "concurrently \"npm:server-install\" \"npm:client-install\"",
     "start": "npm run start-server",
-    "heroku-postbuild": "concurrently \"npm:install-all-deps\" \" npm:build-*\""
+    "heroku-postbuild": "concurrently \"npm:install-all-deps\" \" npm:build-api\" \" npm:build-reactjs\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^7.2.1"
+  },
+  "engines": {
+    "node": "16.14.0"
   }
 }
