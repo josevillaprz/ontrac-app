@@ -12,6 +12,7 @@ const Userdetails = ({ data }) => {
           readOnly: true,
         }}
         style={styles.input}
+        fullWidth={true}
       />
       <TextField
         id="outlined-read-only-input"
@@ -21,6 +22,7 @@ const Userdetails = ({ data }) => {
           readOnly: true,
         }}
         style={styles.input}
+        fullWidth={true}
       />
       <TextField
         id="outlined-read-only-input"
@@ -30,6 +32,7 @@ const Userdetails = ({ data }) => {
           readOnly: true,
         }}
         style={styles.input}
+        fullWidth={true}
       />
     </div>
   );
@@ -40,12 +43,10 @@ export default Userdetails;
 const styles = {
   container: {
     display: "flex",
-    flexWrap: "wrap",
+    flexDirection: "column",
   },
 
   input: {
-    margin: "20px 40px 20px 0",
-    width: "calc(50% - 60px)",
-    minWidth: "260px",
+    marginBottom: "40px",
   },
 };

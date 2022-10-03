@@ -15,6 +15,7 @@ const Userform = ({ toggleEdit, changeHandler, data, submitHandler }) => {
           style={styles.input}
           onChange={changeHandler}
           name="firstName"
+          fullWidth={true}
         />
         <TextField
           id="outlined-read-only-input"
@@ -23,6 +24,7 @@ const Userform = ({ toggleEdit, changeHandler, data, submitHandler }) => {
           style={styles.input}
           onChange={changeHandler}
           name="lastName"
+          fullWidth={true}
         />
         <TextField
           id="outlined-read-only-input"
@@ -31,6 +33,7 @@ const Userform = ({ toggleEdit, changeHandler, data, submitHandler }) => {
           style={styles.input}
           onChange={changeHandler}
           name="email"
+          fullWidth={true}
         />
       </div>
       <div style={styles.btnGroup}>
@@ -51,12 +54,11 @@ const styles = {
 
   inputsContainer: {
     display: "flex",
-    flexWrap: "wrap",
+    flexDirection: "column",
   },
 
   input: {
-    margin: "20px 40px 20px 0",
-    width: "calc(50% - 60px)",
+    marginBottom: "40px",
   },
 
   btn: {
@@ -65,6 +67,7 @@ const styles = {
 
   title: {
     fontWeight: "600",
+    marginBottom: "40px",
   },
 
   btnGroup: {
