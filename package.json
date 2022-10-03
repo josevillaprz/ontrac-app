@@ -13,7 +13,7 @@
     "start-client": "cd reactjs && npm run start",
     "install-all-deps": "concurrently \"npm:server-install\" \"npm:client-install\"",
     "start": "npm run start-server",
-    "heroku-postbuild": "npm:install-all-deps && npm run build-api && npm run build-reactjs"
+    "heroku-postbuild": "npm run install-all-deps && npm run build-api && npm run build-reactjs"
   },
   "keywords": [],
   "author": "",
