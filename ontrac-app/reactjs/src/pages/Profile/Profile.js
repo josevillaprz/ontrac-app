@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import UserHeader from "../../components/UserHeader/UserHeader";
 import EditBtn from "../../components/Buttons/EditBtn";
 import pageStyles from "../PageStyles.module.css";
 import styles from "./Profile.module.css";
@@ -10,6 +9,7 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { getUser, updateUser } from "../../utils/api";
 import Loader from "../../components/Loader/Loader";
+import Avatar from "../../components/Avatar/Avatar";
 
 // test data
 const Profile = ({ toggleLogin }) => {
@@ -74,10 +74,13 @@ const Profile = ({ toggleLogin }) => {
           <h1 className={pageStyles.title}>Profile</h1>
           <section className={styles.section}>
             <div className={styles.headerContainer}>
-              <UserHeader
-                heading={`${userData.firstName} ${userData.lastName}`}
-                subText={userData.email}
-              />
+              <div className={styles.headerName}>
+                <Avatar />
+                <div>
+                  <h2>{`${userData.firstName} ${userData.lastName}`}</h2>
+                  <p>{userData.email}</p>
+                </div>
+              </div>
               <EditBtn toggleEdit={handleClick} />
             </div>
             {editUser ? (
