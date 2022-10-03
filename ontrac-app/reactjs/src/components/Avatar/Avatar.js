@@ -1,5 +1,6 @@
 import React from "react";
 import defaultImg from "../../assets/user-default.png";
+import styles from "./Avatar.module.css";
 
 // test image url
 const user = {
@@ -11,20 +12,9 @@ const user = {
 const Avatar = (props) => {
   return (
     <>
-      <img src={user.avatar} alt="profile" style={styles.img} />
+      <img src={user.avatar} alt="profile" className={styles.img} />
     </>
   );
 };
 
 export default Avatar;
-
-const styles = {
-  img: {
-    borderRadius: "50%",
-    objectFit: "cover",
-    width: "140px",
-    height: "140px",
-    marginRight: "30px",
-    boxShadow: "0 6px 8px #D0D8E8",
-  },
-};
