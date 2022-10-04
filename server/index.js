@@ -3,6 +3,7 @@ const app = express();
 const errorHandler = require("./src/middleware/errorHandler");
 const verifyToken = require("./src/middleware/verifyToken");
 const cors = require("cors");
+const path = require("path");
 
 // MIDDLEWARE
 app.use(express.json());
