@@ -1,15 +1,37 @@
-# Ontrac 
---
-### Overview
+## Project Name
 
-Ontrac is a web app used to track and create workouts and exercises. This app is build using React, JavaScript, CSS, Node, MySQL. 
+**Ontrac**
 
-<br>
+CRUD application used to track gym exercises, workouts, and weight goal progress. Full user authentication using web tokens.
+
+## Techstack
+
+- **Frontend:**
+	- React js
+	- CSS
+	- HTML
+	- Material UI
+	- Javscript
+
+- **Back end:** 
+	- Javascript
+	- Node js
+	- Express js
+	- Sequelize ORM
+	- MySQL
 
 ## Project Status
-Currently, this project is still under development. Users can currently make an account/log in, create exercises and workouts. Chart creation and form validation is still being worked on. Be sure to checkout the `dev` branch to see current works on project
 
-<br>
+This project is currently in development. As of now, all of the functionality works. Users can sign up for an account, create exercises, create workouts, and log weights. The demo can be found [here](https://ontrac-fitness.herokuapp.com/). For an updated list of current developments view the github projects board [here](https://github.com/users/josevillaprz/projects/1/views/1)
+
+## Project Screen Shot(s)
+
+#### Example:   
+
+![ontrac login page](./docs/designs/Login.png)
+![ontrac profile page](./docs/designs/Homepage.png)
+![ontrac body weights page](./docs/designs/Workouts.png)
+![ontrac exercises page](./docs/designs/Exercise.png)
 
 ## Installation and Setup Instructions
 
@@ -17,23 +39,16 @@ Clone down this repository. You will need `node` and `npm` installed globally on
 
 Installation:
 
-1. cd into `ontrac` directory
-2. run `npm install`
-3. run `npm install-all-deps`
+`npm run install-all-deps`  
+ 
+To Start Server:
 
-Start: 
-
-1. `npm start`
+`npm run dev`
 
 To Visit App:
 
-`localhost:3000/login` 
+`localhost:3000/`  
 
-<br> 
 
-## Project Screen Shot
-![ontrac login page](./docs/designs/Login.png)
-![ontrac profile page](./docs/designs/Homepage.png)
-![ontrac body weights page](./docs/designs/Workouts.png)
-![ontrac exercises page](./docs/designs/Exercise.png)
+
 
