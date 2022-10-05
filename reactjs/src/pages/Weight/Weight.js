@@ -15,7 +15,7 @@ const Weight = () => {
 
   useEffect(() => {
     fetchWeights();
-  }, [addWeight]);
+  }, []);
 
   const fetchWeights = async () => {
     setIsLoading(true);
@@ -33,6 +33,7 @@ const Weight = () => {
     // post pounds and userId
     await CreateWeight(inputWeight);
     setAddWeight(false);
+    fetchWeights();
   };
 
   const changeHandler = (e) => {
