@@ -55,7 +55,7 @@ const styles = {
     alignItems: "center",
     borderRadius: "15px",
     boxShadow: "0 10px 20px #D0D8E8",
-    padding: "60px",
+    padding: "20px",
   },
 
   formContainer: {
